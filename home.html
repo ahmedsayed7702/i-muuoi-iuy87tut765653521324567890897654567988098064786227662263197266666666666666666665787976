@@ -92,16 +92,6 @@
 	</script>
 </head>
 <body>
-	<!-- Face ID Modal -->
-	<div id="faceIdModal" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(34,37,38,0.97);z-index:9999;display:flex;align-items:center;justify-content:center;">
-		<div style="background:#232526;padding:40px 30px;border-radius:14px;box-shadow:0 4px 32px #000a;max-width:90vw;text-align:center;">
-			<h2 style="color:#00c6ff;text-align:center;margin-bottom:18px;font-family:'Cairo',sans-serif;">تسجيل الدخول باستخدام Face ID</h2>
-			<button id="faceIdBtn" style="width:100%;background:linear-gradient(90deg,#00c6ff 0%,#007bff 100%);color:#fff;font-size:18px;font-weight:bold;padding:12px 0;border:none;border-radius:7px;cursor:pointer;transition:background 0.3s;display:flex;align-items:center;justify-content:center;gap:10px;">
-				<span style="font-size:22px;">🔒</span> الدخول بـ Face ID
-			</button>
-			<p id="faceIdError" style="color:#dc3545;text-align:center;margin-top:12px;display:none;">فشل التحقق من Face ID</p>
-		</div>
-	</div>
 	<h1>EL-ZOHOR</h1>
 	<div class="container">
 		<button id="importBtn" onclick="pageTransition('index.html')">استيراد</button>
@@ -116,37 +106,6 @@
 		}
 		document.body.style.opacity = "1";
 		document.body.style.transition = "opacity 0.35s cubic-bezier(.4,0,.2,1)";
-
-		// Face ID logic
-		async function tryFaceId() {
-			if (window.PublicKeyCredential) {
-				try {
-					await navigator.credentials.get({
-						publicKey: {
-							challenge: new Uint8Array([1,2,3,4,5,6,7,8,9,0]),
-							timeout: 60000,
-							userVerification: "required"
-						}
-					});
-					document.getElementById('faceIdModal').style.display = 'none';
-				} catch (e) {
-					document.getElementById('faceIdError').style.display = 'block';
-				}
-			} else {
-				document.getElementById('faceIdError').textContent = "جهازك لا يدعم Face ID أو WebAuthn";
-				document.getElementById('faceIdError').style.display = 'block';
-			}
-		}
-		document.getElementById('faceIdBtn').onclick = tryFaceId;
-		window.onload = function() {
-			// Show Face ID modal only on iPhone/iOS
-			const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-			if (isIOS) {
-				document.getElementById('faceIdModal').style.display = 'flex';
-			} else {
-				document.getElementById('faceIdModal').style.display = 'none';
-			}
-		};
 	</script>
 </body>
 </html>
