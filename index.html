@@ -1,214 +1,117 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>EL-ZOHOR Data Entry</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="EL-ZOHOR">
-    <link rel="apple-touch-icon" href="icon.png">
-    <meta name="theme-color" content="#232526">
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            direction: rtl;
-            text-align: right;
-            background: linear-gradient(135deg, #232526 0%, #414345 100%) !important;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            transition: background-color 0.3s ease-in-out;
-        }
-        header {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        form {
-            max-width: 600px;
-            margin: 20px auto;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-        }
-        label, input, textarea {
-            display: block;
-            width: 100%;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-        input, textarea {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            transition: border-color 0.3s;
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-        }
-        input:focus, textarea:focus {
-            border-color: #007bff;
-        }
-        input[type="submit"] {
-            width: auto;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        input[type="submit"]:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-        h2 {
-            text-align: center;
-            margin-top: 20px;
-            color: #fff;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        li {
-            background: rgba(0, 0, 0, 0.7);
-            margin: 10px auto;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-        li:hover {
-            transform: scale(1.02);
-        }
-        a {
-            text-decoration: none;
-            color: #007bff;
-            transition: color 0.3s;
-        }
-        a:hover {
-            color: #0056b3;
-        }
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+	<title>EL-ZOHOR Home</title>
+	<link rel="manifest" href="manifest.json">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-title" content="EL-ZOHOR">
+	<link rel="apple-touch-icon" href="icon.png">
+	<meta name="theme-color" content="#232526">
+	<style>
+		body {
+			font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			direction: rtl;
+			text-align: center;
+			background: linear-gradient(135deg, #232526 0%, #414345 100%) !important;
+			color: #f1f1f1;
+			margin: 0;
+			padding: 0;
+			min-height: 100vh;
+			transition: background 0.7s cubic-bezier(.4,0,.2,1);
+			-webkit-tap-highlight-color: transparent;
+		}
+		.container {
+			margin-top: 80px;
+			animation: fadeInDown 1s;
+			padding: 0 4vw;
+		}
+		@keyframes fadeInDown {
+			from { opacity: 0; transform: translateY(-40px);}
+			to { opacity: 1; transform: translateY(0);}
+		}
+		button {
+			margin: 22px 0;
+			padding: 22px 0;
+			width: 100%;
+			max-width: 350px;
+			font-size: 26px;
+			border: none;
+			border-radius: 16px;
+			cursor: pointer;
+			font-weight: bold;
+			letter-spacing: 1px;
+			box-shadow: 0 4px 18px rgba(0,198,255,0.13);
+			transition: background 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
+			outline: none;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			user-select: none;
+			-webkit-user-select: none;
+			touch-action: manipulation;
+		}
+		#importBtn {
+			background: linear-gradient(90deg, #00c6ff 0%, #007bff 100%);
+			color: #fff;
+		}
+		#exportBtn {
+			background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+			color: #fff;
+		}
+		button:active {
+			transform: scale(0.97);
+			box-shadow: 0 2px 8px rgba(0,198,255,0.18);
+		}
+		button:hover, button:focus {
+			background: linear-gradient(90deg, #232526 0%, #00c6ff 100%);
+			color: #fff;
+			transform: scale(1.04);
+			box-shadow: 0 8px 32px rgba(0,198,255,0.18);
+		}
+		h1 {
+			margin-top: 40px;
+			font-size: 36px;
+			letter-spacing: 2px;
+			color: #00c6ff;
+			text-shadow: 0 2px 12px rgba(0,198,255,0.13);
+			font-family: 'Cairo', 'Segoe UI', sans-serif;
+			animation: fadeInDown 1.2s;
+		}
+		@media (max-width: 700px) {
+			.container {
+				margin-top: 40px;
+				padding: 0 2vw;
+			}
+			button {
+				width: 98%;
+				font-size: 20px;
+				padding: 16px 0;
+				border-radius: 12px;
+			}
+			h1 {
+				font-size: 24px;
+			}
+		}
+	</style>
 </head>
 <body>
-    <header>
-        <button onclick="window.location.href='home.html'" style="position:absolute;left:10px;top:10px;background:linear-gradient(90deg,#00c6ff 0%,#007bff 100%);color:#fff;border:none;padding:10px 18px;border-radius:5px;cursor:pointer;font-weight:bold;box-shadow:0 2px 6px rgba(0,0,0,0.10);transition:background 0.3s,transform 0.2s;font-size:16px;letter-spacing:1px;">الصفحة الرئيسية</button>
-        <h1>صفحة الاستيراد</h1>
-    </header>
-    <form id="accountingForm">
-        <label for="documentValue">قيمة المستند</label>
-        <input type="number" id="documentValue" name="documentValue" required inputmode="numeric">
-
-        <label for="containerCount">عدد حاويات المستند</label>
-        <input type="number" id="containerCount" name="containerCount" required inputmode="numeric">
-
-        <label for="description">البيـــــــــــــــــــــــــــان</label>
-        <textarea id="description" name="description" required inputmode="text"></textarea>
-
-        <label for="storageLocation">مكان التخزين</label>
-        <input type="text" id="storageLocation" name="storageLocation" required inputmode="text">
-
-        <label for="adminExpensesEGP">مصاريف ادارية بالمصري</label>
-        <input type="number" id="adminExpensesEGP" name="adminExpensesEGP" required inputmode="numeric">
-
-        <label for="adminExpensesUSD">مصاريف بالدولار</label>
-        <input type="number" id="adminExpensesUSD" name="adminExpensesUSD" required inputmode="numeric">
-
-        <label for="customsOrOther">جمارك او ارضيات او اخري</label>
-        <input type="text" id="customsOrOther" name="customsOrOther" required>
-
-        <label for="bankName">اسم البنك</label>
-        <input type="text" id="bankName" name="bankName" required>
-
-        <label for="tonPrice">سعر الطن وقت الشراء</label>
-        <input type="number" id="tonPrice" name="tonPrice" required inputmode="numeric">
-
-        <label for="usdPrice">سعر الدولار وقت تنفيذ المستند</label>
-        <input type="number" id="usdPrice" name="usdPrice" required inputmode="numeric">
-
-        <label for="documentNumber">رقم المستند</label>
-        <input type="text" id="documentNumber" name="documentNumber" required>
-
-        <label for="date">التاريخ</label>
-        <input type="date" id="date" name="date" required>
-
-        <input type="submit" value="حفظ">
-    </form>
-    <h2>المستندات المحفوظة</h2>
-    <ul id="documentsList">
-        <!-- Links will be added here dynamically -->
-    </ul>
-    <script>
-        document.getElementById('accountingForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-            let documents = JSON.parse(localStorage.getItem('documents')) || [];
-            // If editing, update the record, else push new
-            if (typeof window.editIndex === 'number') {
-                documents[window.editIndex] = data;
-                window.editIndex = undefined;
-            } else {
-                documents.push(data);
-            }
-            localStorage.setItem('documents', JSON.stringify(documents));
-            alert('تم حفظ البيانات بنجاح');
-            event.target.reset();
-            updateDocumentsList();
-        });
-
-        function updateDocumentsList() {
-            const documentsList = document.getElementById('documentsList');
-            documentsList.innerHTML = '';
-            const documents = JSON.parse(localStorage.getItem('documents')) || [];
-            documents.forEach((doc, index) => {
-                const listItem = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = `document.html?index=${index}`;
-                link.textContent = `${doc.description} - ${doc.date}`;
-                listItem.appendChild(link);
-
-                // Add Edit button
-                const editBtn = document.createElement('button');
-                editBtn.textContent = 'تعديل';
-                editBtn.style.cssText = "margin-right:10px;background:#00c6ff;color:#fff;border:none;padding:6px 14px;border-radius:5px;cursor:pointer;font-size:15px;";
-                editBtn.onclick = function() { editImportRecord(index); };
-                listItem.appendChild(editBtn);
-
-                documentsList.appendChild(listItem);
-            });
-        }
-
-        window.editIndex = undefined;
-        window.editImportRecord = function(idx) {
-            let documents = JSON.parse(localStorage.getItem('documents')) || [];
-            const doc = documents[idx];
-            document.getElementById('documentValue').value = doc.documentValue || '';
-            document.getElementById('containerCount').value = doc.containerCount || '';
-            document.getElementById('description').value = doc.description || '';
-            document.getElementById('storageLocation').value = doc.storageLocation || '';
-            document.getElementById('adminExpensesEGP').value = doc.adminExpensesEGP || '';
-            document.getElementById('adminExpensesUSD').value = doc.adminExpensesUSD || '';
-            document.getElementById('customsOrOther').value = doc.customsOrOther || '';
-            document.getElementById('bankName').value = doc.bankName || '';
-            document.getElementById('tonPrice').value = doc.tonPrice || '';
-            document.getElementById('usdPrice').value = doc.usdPrice || '';
-            document.getElementById('documentNumber').value = doc.documentNumber || '';
-            document.getElementById('date').value = doc.date || '';
-            window.editIndex = idx;
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        };
-
-        document.addEventListener('DOMContentLoaded', updateDocumentsList);
-    </script>
+	<h1>EL-ZOHOR</h1>
+	<div class="container">
+		<button id="importBtn" onclick="pageTransition('import.html')">استيراد</button>
+		<button id="exportBtn" onclick="pageTransition('export.html')">تصدير</button>
+	</div>
+	<script>
+		function pageTransition(url) {
+			document.body.style.opacity = "0";
+			setTimeout(function() {
+				window.location.href = url;
+			}, 350);
+		}
+		document.body.style.opacity = "1";
+		document.body.style.transition = "opacity 0.35s cubic-bezier(.4,0,.2,1)";
+	</script>
 </body>
 </html>
