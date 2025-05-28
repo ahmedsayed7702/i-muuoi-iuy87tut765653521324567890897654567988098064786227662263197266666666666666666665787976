@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+	<title>EL-ZOHOR Home</title>
+	<link rel="manifest" href="manifest.json">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-title" content="EL-ZOHOR">
+	<link rel="apple-touch-icon" href="icon.png">
+	<meta name="theme-color" content="#232526">
+	<style>
+		body {
+			font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			direction: rtl;
+			text-align: center;
+			background: linear-gradient(135deg, #232526 0%, #414345 100%) !important;
+			color: #f1f1f1;
+			margin: 0;
+			padding: 0;
+			min-height: 100vh;
+			transition: background 0.7s cubic-bezier(.4,0,.2,1);
+		}
+		.container {
+			margin-top: 120px;
+			animation: fadeInDown 1s;
+		}
+		@keyframes fadeInDown {
+			from { opacity: 0; transform: translateY(-40px);}
+			to { opacity: 1; transform: translateY(0);}
+		}
+		button {
+			margin: 18px 10px;
+			padding: 18px 40px;
+			font-size: 22px;
+			border: none;
+			border-radius: 12px;
+			cursor: pointer;
+			font-weight: bold;
+			letter-spacing: 1px;
+			box-shadow: 0 4px 18px rgba(0,198,255,0.13);
+			transition: background 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
+			outline: none;
+		}
+		#importBtn {
+			background: linear-gradient(90deg, #00c6ff 0%, #007bff 100%);
+			color: #fff;
+		}
+		#exportBtn {
+			background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+			color: #fff;
+		}
+		button:hover, button:focus {
+			background: linear-gradient(90deg, #232526 0%, #00c6ff 100%);
+			color: #fff;
+			transform: scale(1.08) rotate(-2deg);
+			box-shadow: 0 8px 32px rgba(0,198,255,0.18);
+		}
+		h1 {
+			margin-top: 60px;
+			font-size: 38px;
+			letter-spacing: 2px;
+			color: #00c6ff;
+			text-shadow: 0 2px 12px rgba(0,198,255,0.13);
+			font-family: 'Cairo', 'Segoe UI', sans-serif;
+			animation: fadeInDown 1.2s;
+		}
+		@media (max-width: 700px) {
+			.container {
+				margin-top: 60px;
+			}
+			button {
+				width: 90%;
+				font-size: 18px;
+				padding: 14px 0;
+			}
+			h1 {
+				font-size: 26px;
+			}
+		}
+	</style>
+	<script>
+		function pageTransition(url) {
+			document.body.style.opacity = "0";
+			setTimeout(function() {
+				window.location.href = url;
+			}, 350);
+		}
+		document.body.style.opacity = "1";
+		document.body.style.transition = "opacity 0.35s cubic-bezier(.4,0,.2,1)";
+	</script>
+</head>
+<body>
+	<!-- Face ID Modal -->
+	<div id="faceIdModal" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(34,37,38,0.97);z-index:9999;display:flex;align-items:center;justify-content:center;">
+		<div style="background:#232526;padding:40px 30px;border-radius:14px;box-shadow:0 4px 32px #000a;max-width:90vw;text-align:center;">
+			<h2 style="color:#00c6ff;text-align:center;margin-bottom:18px;font-family:'Cairo',sans-serif;">تسجيل الدخول باستخدام Face ID</h2>
+			<button id="faceIdBtn" style="width:100%;background:linear-gradient(90deg,#00c6ff 0%,#007bff 100%);color:#fff;font-size:18px;font-weight:bold;padding:12px 0;border:none;border-radius:7px;cursor:pointer;transition:background 0.3s;display:flex;align-items:center;justify-content:center;gap:10px;">
+				<span style="font-size:22px;">🔒</span> الدخول بـ Face ID
+			</button>
+			<p id="faceIdError" style="color:#dc3545;text-align:center;margin-top:12px;display:none;">فشل التحقق من Face ID</p>
+		</div>
+	</div>
+	<h1>EL-ZOHOR</h1>
+	<div class="container">
+		<button id="importBtn" onclick="pageTransition('index.html')">استيراد</button>
+		<button id="exportBtn" onclick="pageTransition('export.html')">تصدير</button>
+	</div>
+	<script>
+		function pageTransition(url) {
+			document.body.style.opacity = "0";
+			setTimeout(function() {
+				window.location.href = url;
+			}, 350);
+		}
+		document.body.style.opacity = "1";
+		document.body.style.transition = "opacity 0.35s cubic-bezier(.4,0,.2,1)";
+
+		// Face ID logic
+		async function tryFaceId() {
+			if (window.PublicKeyCredential) {
+				try {
+					await navigator.credentials.get({
+						publicKey: {
+							challenge: new Uint8Array([1,2,3,4,5,6,7,8,9,0]),
+							timeout: 60000,
+							userVerification: "required"
+						}
+					});
+					document.getElementById('faceIdModal').style.display = 'none';
+				} catch (e) {
+					document.getElementById('faceIdError').style.display = 'block';
+				}
+			} else {
+				document.getElementById('faceIdError').textContent = "جهازك لا يدعم Face ID أو WebAuthn";
+				document.getElementById('faceIdError').style.display = 'block';
+			}
+		}
+		document.getElementById('faceIdBtn').onclick = tryFaceId;
+		window.onload = function() {
+			// Show Face ID modal only on iPhone/iOS
+			const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+			if (isIOS) {
+				document.getElementById('faceIdModal').style.display = 'flex';
+			} else {
+				document.getElementById('faceIdModal').style.display = 'none';
+			}
+		};
+	</script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+	<title>EL-ZOHOR Export Data</title>
+	<link rel="manifest" href="manifest.json">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-title" content="EL-ZOHOR">
+	<link rel="apple-touch-icon" href="icon.png">
+	<meta name="theme-color" content="#232526">
+	<style>
+		body {
+			font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			direction: rtl;
+			text-align: right;
+			background: linear-gradient(135deg, #232526 0%, #414345 100%) !important;
+			color: #f1f1f1;
+			margin: 0;
+			padding: 0;
+			min-height: 100vh;
+			transition: background 0.7s cubic-bezier(.4,0,.2,1);
+		}
+		header {
+			background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+			color: #fff;
+			padding: 18px 0 12px 0;
+			text-align: center;
+			box-shadow: 0 2px 12px rgba(0,0,0,0.13);
+			position: relative;
+			letter-spacing: 1px;
+			transition: background 0.5s;
+		}
+		.back-button {
+			position: absolute;
+			left: 10px;
+			top: 10px;
+			background: linear-gradient(90deg, #00c6ff 0%, #007bff 100%);
+			color: #fff;
+			border: none;
+			padding: 10px 18px;
+			border-radius: 5px;
+			cursor: pointer;
+			font-weight: bold;
+			box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+			transition: background 0.3s, color 0.3s, transform 0.2s;
+			font-size: 16px;
+			letter-spacing: 1px;
+		}
+		.back-button:hover {
+			background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+			color: #fff;
+			transform: scale(1.08) rotate(-2deg);
+		}
+		form {
+			max-width: 600px;
+			margin: 40px auto 24px auto;
+			background: rgba(34, 40, 49, 0.97);
+			padding: 28px 22px 20px 22px;
+			border-radius: 16px;
+			box-shadow: 0 6px 32px rgba(0,0,0,0.18);
+			color: #f1f1f1;
+			transition: box-shadow 0.3s, background 0.5s;
+			animation: fadeInUp 0.8s;
+		}
+		@keyframes fadeInUp {
+			from { opacity: 0; transform: translateY(40px);}
+			to { opacity: 1; transform: translateY(0);}
+		}
+		label {
+			font-weight: bold;
+			margin-bottom: 4px;
+			color: #00c6ff;
+			font-size: 16px;
+			letter-spacing: 0.5px;
+		}
+		input, textarea {
+			display: block;
+			width: 100%;
+			margin-bottom: 18px;
+			padding: 12px;
+			border: 1px solid #00c6ff;
+			border-radius: 7px;
+			transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+			background: #232526;
+			color: #f1f1f1;
+			font-size: 16px;
+		}
+		input:focus, textarea:focus {
+			border-color: #fff;
+			box-shadow: 0 0 8px #00c6ff;
+			background: #232526;
+			outline: none;
+		}
+		input[type="submit"] {
+			width: 100%;
+			background: linear-gradient(90deg, #00c6ff 0%, #007bff 100%);
+			color: #fff;
+			border: none;
+			font-size: 18px;
+			font-weight: bold;
+			padding: 14px 0;
+			border-radius: 7px;
+			cursor: pointer;
+			margin-top: 10px;
+			transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+			box-shadow: 0 2px 8px rgba(0,198,255,0.08);
+			letter-spacing: 1px;
+		}
+		input[type="submit"]:hover {
+			background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+			transform: scale(1.04) rotate(-1deg);
+			box-shadow: 0 4px 16px rgba(0,198,255,0.13);
+		}
+		h2 {
+			text-align: center;
+			margin-top: 36px;
+			color: #00c6ff;
+			letter-spacing: 1px;
+			font-size: 26px;
+			text-shadow: 0 2px 8px rgba(0,198,255,0.08);
+		}
+		#exportRecordsContainer {
+			max-width: 900px;
+			margin: 0 auto 40px auto;
+			overflow-x: auto;
+			animation: fadeInUp 1.2s;
+		}
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			background: rgba(34, 40, 49, 0.97);
+			border-radius: 12px;
+			box-shadow: 0 2px 16px rgba(0,198,255,0.07);
+			margin-top: 10px;
+			overflow: hidden;
+		}
+		th, td {
+			border: 1px solid #00c6ff;
+			padding: 12px 8px;
+			text-align: center;
+			font-size: 15px;
+			color: #f1f1f1;
+			transition: background 0.2s, color 0.2s;
+		}
+		th {
+			background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+			color: #fff;
+			font-weight: bold;
+			letter-spacing: 1px;
+		}
+		tr:nth-child(even) td {
+			background: #232526;
+		}
+		tr:hover td {
+			background: #00c6ff;
+			color: #232526;
+		}
+		@media (max-width: 700px) {
+			form, #exportRecordsContainer {
+				padding: 0 2vw;
+			}
+			th, td {
+				font-size: 13px;
+				padding: 7px 4px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<button class="back-button" onclick="pageTransition('home.html')">رجوع</button>
+		<h1 style="font-family:'Cairo',sans-serif;letter-spacing:2px;">تسجيل بيانات التصدير</h1>
+	</header>
+	<form id="exportForm">
+		<label for="invoiceNumber">رقم الفاتورة</label>
+		<input type="text" id="invoiceNumber" name="invoiceNumber" required>
+		
+		<label for="exportDate">التاريخ</label>
+		<input type="date" id="exportDate" name="exportDate" required>
+		
+		<label for="exportDescription">البيان</label>
+		<textarea id="exportDescription" name="exportDescription" required></textarea>
+		
+		<label for="valueRiyal">القيمة بالريال</label>
+		<input type="number" id="valueRiyal" name="valueRiyal" required inputmode="numeric">
+		
+		<label for="valueDollar">القيمة بالدولار</label>
+		<input type="number" id="valueDollar" name="valueDollar" required inputmode="numeric">
+		
+		<label for="transferred">تم التحويل؟</label>
+		<input type="checkbox" id="transferred" name="transferred">
+		
+		<label for="targetBank">البنك المحول عليه</label>
+		<input type="text" id="targetBank" name="targetBank" required>
+		
+		<input type="submit" value="حفظ">
+	</form>
+	<h2>البيانات المسجلة</h2>
+	<div id="exportRecordsContainer">
+		<!-- سيتم عرض البيانات هنا -->
+	</div>
+	<script>
+		function pageTransition(url) {
+			document.body.style.opacity = "0";
+			setTimeout(function() {
+				window.location.href = url;
+			}, 350);
+		}
+		document.body.style.opacity = "1";
+		document.body.style.transition = "opacity 0.35s cubic-bezier(.4,0,.2,1)";
+
+		document.getElementById('exportForm').addEventListener('submit', function(event) {
+			event.preventDefault();
+			const formData = new FormData(event.target);
+			let exportRecord = {};
+			formData.forEach((value, key) => {
+				exportRecord[key] = value;
+			});
+			exportRecord.transferred = document.getElementById('transferred').checked;
+			let exportRecords = JSON.parse(localStorage.getItem('exportRecords')) || [];
+			// If editing, update the record, else push new
+			if (typeof window.editIndex === 'number') {
+				exportRecords[window.editIndex] = exportRecord;
+				window.editIndex = undefined;
+			} else {
+				exportRecords.push(exportRecord);
+			}
+			localStorage.setItem('exportRecords', JSON.stringify(exportRecords));
+			alert('تم حفظ بيانات التصدير');
+			event.target.reset();
+			updateExportRecords();
+		});
+
+		function updateExportRecords() {
+			const container = document.getElementById('exportRecordsContainer');
+			let exportRecords = JSON.parse(localStorage.getItem('exportRecords')) || [];
+			if(exportRecords.length === 0) {
+				container.innerHTML = '<p style="text-align:center;color:#00c6ff;">لا توجد بيانات مسجلة</p>';
+				return;
+			}
+			let htmlContent = '<table>';
+			htmlContent += '<thead><tr>';
+			htmlContent += '<th>رقم الفاتورة</th>';
+			htmlContent += '<th>التاريخ</th>';
+			htmlContent += '<th>البيان</th>';
+			htmlContent += '<th>القيمة بالريال</th>';
+			htmlContent += '<th>القيمة بالدولار</th>';
+			htmlContent += '<th>تم التحويل</th>';
+			htmlContent += '<th>البنك المحول عليه</th>';
+			htmlContent += '<th>تعديل</th>';
+			htmlContent += '</tr></thead><tbody>';
+			exportRecords.forEach((record, idx) => {
+				htmlContent += '<tr>';
+				htmlContent += `<td>${record.invoiceNumber || ''}</td>`;
+				htmlContent += `<td>${record.exportDate || ''}</td>`;
+				htmlContent += `<td>${record.exportDescription || ''}</td>`;
+				htmlContent += `<td>${record.valueRiyal || ''}</td>`;
+				htmlContent += `<td>${record.valueDollar || ''}</td>`;
+				htmlContent += `<td>${record.transferred ? 'نعم' : 'لا'}</td>`;
+				htmlContent += `<td>${record.targetBank || ''}</td>`;
+				htmlContent += `<td><button onclick="editExportRecord(${idx})" style="background:#00c6ff;color:#fff;border:none;padding:6px 14px;border-radius:5px;cursor:pointer;font-size:15px;">تعديل</button></td>`;
+				htmlContent += '</tr>';
+			});
+			htmlContent += '</tbody></table>';
+			container.innerHTML = htmlContent;
+		}
+
+		window.editIndex = undefined;
+		window.editExportRecord = function(idx) {
+			let exportRecords = JSON.parse(localStorage.getItem('exportRecords')) || [];
+			const record = exportRecords[idx];
+			document.getElementById('invoiceNumber').value = record.invoiceNumber || '';
+			document.getElementById('exportDate').value = record.exportDate || '';
+			document.getElementById('exportDescription').value = record.exportDescription || '';
+			document.getElementById('valueRiyal').value = record.valueRiyal || '';
+			document.getElementById('valueDollar').value = record.valueDollar || '';
+			document.getElementById('transferred').checked = !!record.transferred;
+			document.getElementById('targetBank').value = record.targetBank || '';
+			window.editIndex = idx;
+			window.scrollTo({top: 0, behavior: 'smooth'});
+		};
+
+		document.addEventListener('DOMContentLoaded', function() {
+			document.body.style.opacity = "1";
+			updateExportRecords();
+		});
+	</script>
+</body>
+</html>

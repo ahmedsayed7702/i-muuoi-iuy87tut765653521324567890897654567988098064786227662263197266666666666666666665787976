@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>تفاصيل المستند</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="EL-ZOHOR">
+    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="theme-color" content="#232526">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            direction: rtl;
+            text-align: right;
+            background: linear-gradient(135deg, #232526 0%, #414345 100%) !important;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease-in-out;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            color: #fff;
+        }
+        th {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        td[contenteditable="true"] {
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: background-color 0.3s;
+        }
+        td[contenteditable="true"]:focus {
+            background-color: #e9ecef;
+        }
+        .actions button {
+            margin: 2px;
+            padding: 5px 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #dc3545;
+            color: #fff;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .actions button:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+        .back-button {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        /* Password Modal Styles */
+        #passwordModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(34, 37, 38, 0.97);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #passwordModal div {
+            background: #232526;
+            padding: 40px 30px;
+            border-radius: 14px;
+            box-shadow: 0 4px 32px #000a;
+            max-width: 90vw;
+        }
+        #passwordModal h2 {
+            color: #00c6ff;
+            text-align: center;
+            margin-bottom: 18px;
+            font-family: 'Cairo', sans-serif;
+        }
+        #passwordModal input {
+            width: 100%;
+            padding: 12px 10px;
+            border-radius: 7px;
+            border: 1px solid #00c6ff;
+            font-size: 18px;
+            margin-bottom: 16px;
+            background: #232526;
+            color: #fff;
+            outline: none;
+        }
+        #passwordModal button {
+            width: 100%;
+            background: linear-gradient(90deg, #00c6ff 0%, #007bff 100%);
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 12px 0;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #passwordModal p {
+            color: #dc3545;
+            text-align: center;
+            margin-top: 12px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="back-button" onclick="window.location.href='index.html'">رجوع</button>
+        <h1>تفاصيل المستند</h1>
+    </header>
+    <table>
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">اسم العميل</th>
+                <th>الكمية بالجوال</th>
+                <th>الوزن الصافي بالكيلو</th>
+                <th>سعر الكيلو</th>
+                <th>القيمة الاجمالية</th>
+                <th>القيمة المسددة</th>
+                <th>القيمة المتبقية</th>
+                <th>إجراءات</th>
+            </tr>
+        </thead>
+        <tbody id="salesTableBody">
+            <!-- Rows will be added here dynamically -->
+        </tbody>
+    </table>
+    <button onclick="addRow()">إضافة صف جديد</button>
+
+    <h2>بيانات المستند</h2>
+    <table id="documentDetailsTable">
+        <thead>
+            <tr>
+                <th>قيمة المستند</th>
+                <th>عدد حاويات المستند</th>
+                <th>البيـــــــــــــــــــــــــــان</th>
+                <th>مكان التخزين</th>
+                <th>مصاريف ادارية بالمصري</th>
+                <th>مصاريف بالدولار</th>
+                <th>جمارك او ارضيات او اخري</th>
+                <th>اسم البنك</th>
+                <th>سعر الطن وقت الشراء</th>
+                <th>سعر الدولار وقت تنفيذ المستند</th>
+                <th>رقم المستند</th>
+                <th>التاريخ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="documentDetailsRow">
+                <!-- Document details will be added here dynamically -->
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const documentIndex = urlParams.get('index');
+        const documents = JSON.parse(localStorage.getItem('documents')) || [];
+        const documentData = documents[documentIndex];
+
+        function sortTable(columnIndex) {
+            const table = document.getElementById('salesTableBody');
+            const rows = Array.from(table.rows);
+            const sortedRows = rows.sort((a, b) => {
+                const aText = a.cells[columnIndex].innerText.toLowerCase();
+                const bText = b.cells[columnIndex].innerText.toLowerCase();
+                return aText.localeCompare(bText);
+            });
+            table.innerHTML = '';
+            sortedRows.forEach(row => table.appendChild(row));
+        }
+
+        function saveSalesData() {
+            const rows = document.querySelectorAll('#salesTableBody tr');
+            const sales = [];
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const sale = {
+                    customerName: cells[0].innerText,
+                    quantity: parseFloat(cells[1].innerText) || 0,
+                    weight: parseFloat(cells[2].innerText) || 0,
+                    pricePerKilo: parseFloat(cells[3].innerText) || 0,
+                    paidValue: parseFloat(cells[5].innerText) || 0
+                };
+                sales.push(sale);
+            });
+            documentData.sales = sales;
+            documents[documentIndex] = documentData;
+            localStorage.setItem('documents', JSON.stringify(documents));
+            updateTableValues();
+        }
+
+        function updateTableValues() {
+            const rows = document.querySelectorAll('#salesTableBody tr');
+            rows.forEach(row => {
+                const weight = parseFloat(row.cells[2].innerText) || 0;
+                const pricePerKilo = parseFloat(row.cells[3].innerText) || 0;
+                const totalValue = weight * pricePerKilo;
+                row.cells[4].innerText = totalValue.toFixed(2);
+                const paidValue = parseFloat(row.cells[5].innerText) || 0;
+                const remainingValue = totalValue - paidValue;
+                row.cells[6].innerText = remainingValue.toFixed(2);
+            });
+        }
+
+        function addRow() {
+            const salesTableBody = document.getElementById('salesTableBody');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td></td>
+                <td contenteditable="true"></td>
+                <td></td>
+                <td class="actions">
+                    <button onclick="deleteRow(this)">حذف</button>
+                </td>
+            `;
+            salesTableBody.appendChild(row);
+            row.addEventListener('input', saveSalesData);
+        }
+
+        function deleteRow(button) {
+            const row = button.parentElement.parentElement;
+            row.remove();
+            saveSalesData();
+        }
+
+        function displayDocumentDetails() {
+            const documentDetailsRow = document.getElementById('documentDetailsRow');
+            const details = [
+                documentData.documentValue,
+                documentData.containerCount,
+                documentData.description,
+                documentData.storageLocation,
+                documentData.adminExpensesEGP,
+                documentData.adminExpensesUSD,
+                documentData.customsOrOther,
+                documentData.bankName,
+                documentData.tonPrice,
+                documentData.usdPrice,
+                documentData.documentNumber,
+                documentData.date
+            ];
+            details.forEach(detail => {
+                const cell = document.createElement('td');
+                cell.textContent = detail;
+                documentDetailsRow.appendChild(cell);
+            });
+        }
+
+        window.onload = function() {
+            document.getElementById('sitePassword').focus();
+        };
+
+        if (documentData) {
+            const salesTableBody = document.getElementById('salesTableBody');
+            documentData.sales = documentData.sales || [];
+            documentData.sales.forEach(sale => {
+                const row = document.createElement('tr');
+                const totalValue = sale.weight * sale.pricePerKilo;
+                const remainingValue = totalValue - sale.paidValue;
+
+                row.innerHTML = `
+                    <td contenteditable="true">${sale.customerName}</td>
+                    <td contenteditable="true">${sale.quantity}</td>
+                    <td contenteditable="true">${sale.weight}</td>
+                    <td contenteditable="true">${sale.pricePerKilo}</td>
+                    <td>${totalValue.toFixed(2)}</td>
+                    <td contenteditable="true">${sale.paidValue}</td>
+                    <td>${remainingValue.toFixed(2)}</td>
+                    <td class="actions">
+                        <button onclick="deleteRow(this)">حذف</button>
+                    </td>
+                `;
+                salesTableBody.appendChild(row);
+                row.addEventListener('input', saveSalesData);
+            });
+            displayDocumentDetails();
+        } else {
+            alert('المستند غير موجود');
+        }
+
+        document.addEventListener('input', saveSalesData);
+    </script>
+</body>
+</html>
