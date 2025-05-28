@@ -21,27 +21,37 @@
 			padding: 0;
 			min-height: 100vh;
 			transition: background 0.7s cubic-bezier(.4,0,.2,1);
+			-webkit-tap-highlight-color: transparent;
 		}
 		.container {
-			margin-top: 120px;
+			margin-top: 80px;
 			animation: fadeInDown 1s;
+			padding: 0 4vw;
 		}
 		@keyframes fadeInDown {
 			from { opacity: 0; transform: translateY(-40px);}
 			to { opacity: 1; transform: translateY(0);}
 		}
 		button {
-			margin: 18px 10px;
-			padding: 18px 40px;
-			font-size: 22px;
+			margin: 22px 0;
+			padding: 22px 0;
+			width: 100%;
+			max-width: 350px;
+			font-size: 26px;
 			border: none;
-			border-radius: 12px;
+			border-radius: 16px;
 			cursor: pointer;
 			font-weight: bold;
 			letter-spacing: 1px;
 			box-shadow: 0 4px 18px rgba(0,198,255,0.13);
 			transition: background 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
 			outline: none;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			user-select: none;
+			-webkit-user-select: none;
+			touch-action: manipulation;
 		}
 		#importBtn {
 			background: linear-gradient(90deg, #00c6ff 0%, #007bff 100%);
@@ -51,15 +61,19 @@
 			background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
 			color: #fff;
 		}
+		button:active {
+			transform: scale(0.97);
+			box-shadow: 0 2px 8px rgba(0,198,255,0.18);
+		}
 		button:hover, button:focus {
 			background: linear-gradient(90deg, #232526 0%, #00c6ff 100%);
 			color: #fff;
-			transform: scale(1.08) rotate(-2deg);
+			transform: scale(1.04);
 			box-shadow: 0 8px 32px rgba(0,198,255,0.18);
 		}
 		h1 {
-			margin-top: 60px;
-			font-size: 38px;
+			margin-top: 40px;
+			font-size: 36px;
 			letter-spacing: 2px;
 			color: #00c6ff;
 			text-shadow: 0 2px 12px rgba(0,198,255,0.13);
@@ -68,15 +82,17 @@
 		}
 		@media (max-width: 700px) {
 			.container {
-				margin-top: 60px;
+				margin-top: 40px;
+				padding: 0 2vw;
 			}
 			button {
-				width: 90%;
-				font-size: 18px;
-				padding: 14px 0;
+				width: 98%;
+				font-size: 20px;
+				padding: 16px 0;
+				border-radius: 12px;
 			}
 			h1 {
-				font-size: 26px;
+				font-size: 24px;
 			}
 		}
 	</style>
