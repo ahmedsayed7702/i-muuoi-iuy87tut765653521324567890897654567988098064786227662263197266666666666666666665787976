@@ -97,15 +97,5 @@
 		<button id="importBtn" onclick="pageTransition('index.html')">استيراد</button>
 		<button id="exportBtn" onclick="pageTransition('export.html')">تصدير</button>
 	</div>
-	<script>
-		function pageTransition(url) {
-			document.body.style.opacity = "0";
-			setTimeout(function() {
-				window.location.href = url;
-			}, 350);
-		}
-		document.body.style.opacity = "1";
-		document.body.style.transition = "opacity 0.35s cubic-bezier(.4,0,.2,1)";
-	</script>
 </body>
 </html>
