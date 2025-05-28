@@ -97,11 +97,36 @@
 		a:hover {
 			color: #0056b3;
 		}
+		.back-home-btn {
+			display: block;
+			margin: 30px auto 0 auto;
+			background: linear-gradient(90deg,#00c6ff 0%,#007bff 100%);
+			color: #fff;
+			border: none;
+			padding: 16px 32px;
+			border-radius: 10px;
+			cursor: pointer;
+			font-size: 20px;
+			font-weight: bold;
+			box-shadow: 0 2px 8px rgba(0,198,255,0.13);
+			transition: background 0.3s, transform 0.2s;
+			width: 90%;
+			max-width: 350px;
+		}
+		.back-home-btn:active {
+			transform: scale(0.97);
+		}
+		@media (max-width: 700px) {
+			.back-home-btn {
+				font-size: 16px;
+				padding: 12px 0;
+				border-radius: 8px;
+			}
+		}
 	</style>
 </head>
 <body>
 	<header>
-		<button onclick="window.location.href='home.html'" style="position:absolute;left:10px;top:10px;background:linear-gradient(90deg,#00c6ff 0%,#007bff 100%);color:#fff;border:none;padding:10px 18px;border-radius:5px;cursor:pointer;font-weight:bold;box-shadow:0 2px 6px rgba(0,0,0,0.10);transition:background 0.3s,transform 0.2s;font-size:16px;letter-spacing:1px;">الصفحة الرئيسية</button>
 		<h1>صفحة الاستيراد</h1>
 	</header>
 	<form id="importForm">
@@ -147,6 +172,8 @@
 	<ul id="documentsList">
 		<!-- Links will be added here dynamically -->
 	</ul>
+	<!-- Back to home button placed lower on the page -->
+	<button class="back-home-btn" onclick="window.location.href='home.html'">الصفحة الرئيسية</button>
 	<script>
 		document.getElementById('importForm').addEventListener('submit', function(event) {
 			event.preventDefault();

@@ -157,6 +157,25 @@
 			background: #00c6ff;
 			color: #232526;
 		}
+		.back-home-btn {
+			display: block;
+			margin: 30px auto 0 auto;
+			background: linear-gradient(90deg,#00c6ff 0%,#007bff 100%);
+			color: #fff;
+			border: none;
+			padding: 16px 32px;
+			border-radius: 10px;
+			cursor: pointer;
+			font-size: 20px;
+			font-weight: bold;
+			box-shadow: 0 2px 8px rgba(0,198,255,0.13);
+			transition: background 0.3s, transform 0.2s;
+			width: 90%;
+			max-width: 350px;
+		}
+		.back-home-btn:active {
+			transform: scale(0.97);
+		}
 		@media (max-width: 700px) {
 			form, #exportRecordsContainer {
 				padding: 0 2vw;
@@ -165,12 +184,16 @@
 				font-size: 13px;
 				padding: 7px 4px;
 			}
+			.back-home-btn {
+				font-size: 16px;
+				padding: 12px 0;
+				border-radius: 8px;
+			}
 		}
 	</style>
 </head>
 <body>
 	<header>
-		<button class="back-button" onclick="pageTransition('home.html')">رجوع</button>
 		<h1 style="font-family:'Cairo',sans-serif;letter-spacing:2px;">تسجيل بيانات التصدير</h1>
 	</header>
 	<form id="exportForm">
@@ -201,6 +224,8 @@
 	<div id="exportRecordsContainer">
 		<!-- سيتم عرض البيانات هنا -->
 	</div>
+	<!-- Back to home button placed lower on the page -->
+	<button class="back-home-btn" onclick="pageTransition('home.html')">الصفحة الرئيسية</button>
 	<script>
 		function pageTransition(url) {
 			document.body.style.opacity = "0";

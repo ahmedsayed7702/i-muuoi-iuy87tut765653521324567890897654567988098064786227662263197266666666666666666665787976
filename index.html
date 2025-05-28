@@ -80,6 +80,25 @@
 			font-family: 'Cairo', 'Segoe UI', sans-serif;
 			animation: fadeInDown 1.2s;
 		}
+		.back-home-btn {
+			display: block;
+			margin: 30px auto 0 auto;
+			background: linear-gradient(90deg,#00c6ff 0%,#007bff 100%);
+			color: #fff;
+			border: none;
+			padding: 16px 32px;
+			border-radius: 10px;
+			cursor: pointer;
+			font-size: 20px;
+			font-weight: bold;
+			box-shadow: 0 2px 8px rgba(0,198,255,0.13);
+			transition: background 0.3s, transform 0.2s;
+			width: 90%;
+			max-width: 350px;
+		}
+		.back-home-btn:active {
+			transform: scale(0.97);
+		}
 		@media (max-width: 700px) {
 			.container {
 				margin-top: 40px;
@@ -94,6 +113,11 @@
 			h1 {
 				font-size: 24px;
 			}
+			.back-home-btn {
+				font-size: 16px;
+				padding: 12px 0;
+				border-radius: 8px;
+			}
 		}
 	</style>
 </head>
@@ -103,6 +127,8 @@
 		<button id="importBtn" onclick="pageTransition('import.html')">استيراد</button>
 		<button id="exportBtn" onclick="pageTransition('export.html')">تصدير</button>
 	</div>
+	<!-- Back to home button placed lower on the page -->
+	<button class="back-home-btn" onclick="window.location.href='home.html'">الصفحة الرئيسية</button>
 	<script>
 		function pageTransition(url) {
 			document.body.style.opacity = "0";
