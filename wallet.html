@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+	<title>حسابات المحفظة</title>
+	<link rel="manifest" href="manifest.json">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+	<meta name="apple-mobile-web-app-title" content="EL-ZOHOR">
+	<link rel="apple-touch-icon" href="icon.png">
+	<meta name="theme-color" content="#f4f8fb">
+	<style>
+		body {
+			font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			direction: rtl;
+			text-align: right;
+			background: linear-gradient(135deg, #f4f8fb 0%, #e9f1fa 100%) !important;
+			color: #222;
+			margin: 0;
+			padding: 0;
+			min-height: 100vh;
+			-webkit-tap-highlight-color: transparent;
+		}
+		header {
+			background: linear-gradient(90deg, #6dd5ed 0%, #2193b0 100%);
+			color: #fff;
+			padding: 18px 0 12px 0;
+			text-align: center;
+			box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+			position: relative;
+			letter-spacing: 1px;
+			border-bottom-left-radius: 24px;
+			border-bottom-right-radius: 24px;
+		}
+		#walletBalance {
+			text-align: center;
+			font-size: 24px;
+			font-weight: bold;
+			color: #2193b0;
+			margin: 22px 0 0 0;
+			letter-spacing: 1px;
+			background: #e9f1fa;
+			padding: 12px 0;
+			border-radius: 12px;
+			box-shadow: 0 2px 8px rgba(33,147,176,0.07);
+			max-width: 400px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		form {
+			max-width: 500px;
+			margin: 30px auto 0 auto;
+			background: #fff;
+			padding: 22px 18px 18px 18px;
+			border-radius: 18px;
+			box-shadow: 0 4px 24px rgba(33,147,176,0.10);
+		}
+		label {
+			font-weight: bold;
+			color: #2193b0;
+			margin-bottom: 4px;
+			font-size: 16px;
+		}
+		input, textarea, select {
+			display: block;
+			width: 100%;
+			margin-bottom: 14px;
+			padding: 12px;
+			border: 1px solid #b2dffb;
+			border-radius: 8px;
+			background: #f4f8fb;
+			color: #222;
+			font-size: 16px;
+			transition: border-color 0.3s;
+		}
+		input:focus, textarea:focus, select:focus {
+			border-color: #2193b0;
+			outline: none;
+			background: #e9f1fa;
+		}
+		.btns {
+			display: flex;
+			justify-content: space-between;
+			gap: 10px;
+		}
+		button, .btns button {
+			background: linear-gradient(90deg, #6dd5ed 0%, #2193b0 100%);
+			color: #fff;
+			border: none;
+			padding: 14px 0;
+			border-radius: 10px;
+			font-size: 18px;
+			font-weight: bold;
+			cursor: pointer;
+			width: 48%;
+			transition: background 0.3s, transform 0.2s;
+			box-shadow: 0 2px 8px rgba(33,147,176,0.10);
+		}
+		button:active, .btns button:active {
+			transform: scale(0.97);
+		}
+		.edit-btn {
+			background: #2193b0;
+			color: #fff;
+			border: none;
+			padding: 6px 14px;
+			border-radius: 6px;
+			cursor: pointer;
+			font-size: 15px;
+			margin-right: 5px;
+			transition: background 0.2s;
+		}
+		.edit-btn:hover {
+			background: #6dd5ed;
+			color: #222;
+		}
+		.back-home-btn {
+			display: block;
+			margin: 30px auto 0 auto;
+			background: linear-gradient(90deg,#6dd5ed 0%,#2193b0 100%);
+			color: #fff;
+			border: none;
+			padding: 16px 32px;
+			border-radius: 12px;
+			cursor: pointer;
+			font-size: 20px;
+			font-weight: bold;
+			box-shadow: 0 2px 8px rgba(33,147,176,0.10);
+			transition: background 0.3s, transform 0.2s;
+			width: 90%;
+			max-width: 350px;
+		}
+		.back-home-btn:active {
+			transform: scale(0.97);
+		}
+		@media (max-width: 700px) {
+			form {
+				padding: 10px 2vw;
+			}
+			.back-home-btn {
+				font-size: 16px;
+				padding: 12px 0;
+				border-radius: 8px;
+			}
+			button, .btns button {
+				font-size: 16px;
+				padding: 10px 0;
+			}
+			#walletBalance {
+				font-size: 18px;
+				padding: 8px 0;
+			}
+		}
+		#walletRecordsContainer {
+			max-width: 600px;
+			margin: 20px auto 40px auto;
+			overflow-x: auto;
+		}
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			background: #fff;
+			border-radius: 14px;
+			box-shadow: 0 2px 16px rgba(33,147,176,0.07);
+			margin-top: 10px;
+			overflow: hidden;
+		}
+		th, td {
+			border: 1px solid #b2dffb;
+			padding: 10px 8px;
+			text-align: center;
+			font-size: 15px;
+			color: #222;
+		}
+		th {
+			background: linear-gradient(90deg, #6dd5ed 0%, #2193b0 100%);
+			color: #fff;
+			font-weight: bold;
+		}
+		tr:nth-child(even) td {
+			background: #f4f8fb;
+		}
+		tr:hover td {
+			background: #e9f1fa;
+			color: #2193b0;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>حسابات المحفظة</h1>
+	</header>
+	<div id="walletBalance">الرصيد: 0</div>
+	<form id="walletForm">
+		<label for="amount">مبلغ التحويل</label>
+		<input type="number" id="amount" name="amount" required inputmode="decimal" pattern="[0-9]*">
+
+		<label for="description">البيان</label>
+		<textarea id="description" name="description" required></textarea>
+
+		<label for="date">التاريخ</label>
+		<input type="date" id="date" name="date" required>
+
+		<div class="btns">
+			<button type="button" onclick="setTypeAndSubmit('in')">تحويل وارد</button>
+			<button type="button" onclick="setTypeAndSubmit('out')">تحويل صادر</button>
+		</div>
+		<input type="hidden" id="walletType" name="walletType" value="">
+	</form>
+	<h2 style="color:#2193b0;">التحويلات المسجلة</h2>
+	<div id="walletRecordsContainer"></div>
+	<button class="back-home-btn" onclick="window.location.href='home.html'">الصفحة الرئيسية</button>
+	<script>
+		function setTypeAndSubmit(type) {
+			document.getElementById('walletType').value = type;
+			document.getElementById('walletForm').requestSubmit();
+		}
+
+		function formatNumber(num) {
+			if (num === undefined || num === null || num === '') return '';
+			return Number(num).toLocaleString('en-US');
+		}
+
+		document.getElementById('amount').setAttribute('inputmode', 'decimal');
+
+		document.getElementById('walletForm').addEventListener('submit', function(event) {
+			event.preventDefault();
+			const formData = new FormData(event.target);
+			let walletRecord = {};
+			formData.forEach((value, key) => {
+				walletRecord[key] = value;
+			});
+			let walletRecords = JSON.parse(localStorage.getItem('walletRecords')) || [];
+			// If editing, update the record, else push new
+			if (typeof window.editIndex === 'number') {
+				walletRecords[window.editIndex] = walletRecord;
+				window.editIndex = undefined;
+			} else {
+				walletRecords.push(walletRecord);
+			}
+			localStorage.setItem('walletRecords', JSON.stringify(walletRecords));
+			alert('تم حفظ التحويل');
+			event.target.reset();
+			updateWalletRecords();
+		});
+
+		function updateWalletRecords() {
+			const container = document.getElementById('walletRecordsContainer');
+			let walletRecords = JSON.parse(localStorage.getItem('walletRecords')) || [];
+			let balance = 0;
+			walletRecords.forEach(record => {
+				const amount = parseFloat(record.amount) || 0;
+				if (record.walletType === 'in') {
+					balance += amount;
+				} else if (record.walletType === 'out') {
+					balance -= amount;
+				}
+			});
+			document.getElementById('walletBalance').textContent = 'الرصيد: ' + formatNumber(balance);
+
+			if(walletRecords.length === 0) {
+				container.innerHTML = '<p style="text-align:center;color:#2193b0;">لا توجد تحويلات مسجلة</p>';
+				return;
+			}
+			let htmlContent = '<table>';
+			htmlContent += '<thead><tr>';
+			htmlContent += '<th>المبلغ</th>';
+			htmlContent += '<th>البيان</th>';
+			htmlContent += '<th>التاريخ</th>';
+			htmlContent += '<th>نوع التحويل</th>';
+			htmlContent += '<th>تعديل</th>';
+			htmlContent += '</tr></thead><tbody>';
+			walletRecords.forEach((record, idx) => {
+				htmlContent += '<tr>';
+				htmlContent += `<td>${formatNumber(record.amount)}</td>`;
+				htmlContent += `<td>${record.description || ''}</td>`;
+				htmlContent += `<td>${record.date || ''}</td>`;
+				htmlContent += `<td>${record.walletType === 'in' ? 'وارد' : 'صادر'}</td>`;
+				htmlContent += `<td><button class="edit-btn" onclick="editWalletRecord(${idx})">تعديل</button></td>`;
+				htmlContent += '</tr>';
+			});
+			htmlContent += '</tbody></table>';
+			container.innerHTML = htmlContent;
+		}
+
+		window.editIndex = undefined;
+		window.editWalletRecord = function(idx) {
+			let walletRecords = JSON.parse(localStorage.getItem('walletRecords')) || [];
+			const record = walletRecords[idx];
+			document.getElementById('amount').value = record.amount || '';
+			document.getElementById('description').value = record.description || '';
+			document.getElementById('date').value = record.date || '';
+			document.getElementById('walletType').value = record.walletType || '';
+			window.editIndex = idx;
+			window.scrollTo({top: 0, behavior: 'smooth'});
+		};
+
+		document.addEventListener('DOMContentLoaded', updateWalletRecords);
+	</script>
+</body>
+</html>

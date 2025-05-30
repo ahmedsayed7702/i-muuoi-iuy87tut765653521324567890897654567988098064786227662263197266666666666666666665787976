@@ -6,61 +6,41 @@
 	<title>EL-ZOHOR Export Data</title>
 	<link rel="manifest" href="manifest.json">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
 	<meta name="apple-mobile-web-app-title" content="EL-ZOHOR">
 	<link rel="apple-touch-icon" href="icon.png">
-	<meta name="theme-color" content="#232526">
+	<meta name="theme-color" content="#f4f8fb">
 	<style>
 		body {
 			font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 			direction: rtl;
 			text-align: right;
-			background: linear-gradient(135deg, #232526 0%, #414345 100%) !important;
-			color: #f1f1f1;
+			background: linear-gradient(135deg, #fafdff 0%, #e3f0ff 100%) !important;
+			color: #1a2a3a;
 			margin: 0;
 			padding: 0;
 			min-height: 100vh;
 			transition: background 0.7s cubic-bezier(.4,0,.2,1);
 		}
 		header {
-			background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+			background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
 			color: #fff;
-			padding: 18px 0 12px 0;
+			padding: 22px 0 16px 0;
 			text-align: center;
-			box-shadow: 0 2px 12px rgba(0,0,0,0.13);
+			box-shadow: 0 2px 16px rgba(24,90,157,0.10);
 			position: relative;
 			letter-spacing: 1px;
-			transition: background 0.5s;
-		}
-		.back-button {
-			position: absolute;
-			left: 10px;
-			top: 10px;
-			background: linear-gradient(90deg, #00c6ff 0%, #007bff 100%);
-			color: #fff;
-			border: none;
-			padding: 10px 18px;
-			border-radius: 5px;
-			cursor: pointer;
-			font-weight: bold;
-			box-shadow: 0 2px 6px rgba(0,0,0,0.10);
-			transition: background 0.3s, color 0.3s, transform 0.2s;
-			font-size: 16px;
-			letter-spacing: 1px;
-		}
-		.back-button:hover {
-			background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
-			color: #fff;
-			transform: scale(1.08) rotate(-2deg);
+			border-bottom-left-radius: 28px;
+			border-bottom-right-radius: 28px;
 		}
 		form {
 			max-width: 600px;
 			margin: 40px auto 24px auto;
-			background: rgba(34, 40, 49, 0.97);
-			padding: 28px 22px 20px 22px;
-			border-radius: 16px;
-			box-shadow: 0 6px 32px rgba(0,0,0,0.18);
-			color: #f1f1f1;
+			background: #fff;
+			padding: 32px 22px 24px 22px;
+			border-radius: 22px;
+			box-shadow: 0 8px 32px rgba(24,90,157,0.10);
+			color: #1a2a3a;
 			transition: box-shadow 0.3s, background 0.5s;
 			animation: fadeInUp 0.8s;
 		}
@@ -71,7 +51,7 @@
 		label {
 			font-weight: bold;
 			margin-bottom: 4px;
-			color: #00c6ff;
+			color: #185a9d;
 			font-size: 16px;
 			letter-spacing: 0.5px;
 		}
@@ -79,47 +59,47 @@
 			display: block;
 			width: 100%;
 			margin-bottom: 18px;
-			padding: 12px;
-			border: 1px solid #00c6ff;
-			border-radius: 7px;
+			padding: 14px;
+			border: 1px solid #b2dffb;
+			border-radius: 10px;
 			transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
-			background: #232526;
-			color: #f1f1f1;
+			background: #fafdff;
+			color: #1a2a3a;
 			font-size: 16px;
 		}
 		input:focus, textarea:focus {
-			border-color: #fff;
-			box-shadow: 0 0 8px #00c6ff;
-			background: #232526;
+			border-color: #185a9d;
+			box-shadow: 0 0 8px #b2dffb;
+			background: #e3f0ff;
 			outline: none;
 		}
 		input[type="submit"] {
 			width: 100%;
-			background: linear-gradient(90deg, #00c6ff 0%, #007bff 100%);
+			background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
 			color: #fff;
 			border: none;
-			font-size: 18px;
+			font-size: 20px;
 			font-weight: bold;
-			padding: 14px 0;
-			border-radius: 7px;
+			padding: 16px 0;
+			border-radius: 12px;
 			cursor: pointer;
 			margin-top: 10px;
 			transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
-			box-shadow: 0 2px 8px rgba(0,198,255,0.08);
+			box-shadow: 0 2px 8px rgba(24,90,157,0.08);
 			letter-spacing: 1px;
 		}
 		input[type="submit"]:hover {
-			background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+			background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
 			transform: scale(1.04) rotate(-1deg);
-			box-shadow: 0 4px 16px rgba(0,198,255,0.13);
+			box-shadow: 0 4px 16px rgba(24,90,157,0.13);
 		}
 		h2 {
 			text-align: center;
 			margin-top: 36px;
-			color: #00c6ff;
+			color: #185a9d;
 			letter-spacing: 1px;
 			font-size: 26px;
-			text-shadow: 0 2px 8px rgba(0,198,255,0.08);
+			text-shadow: 0 2px 8px rgba(24,90,157,0.08);
 		}
 		#exportRecordsContainer {
 			max-width: 900px;
@@ -130,51 +110,69 @@
 		table {
 			width: 100%;
 			border-collapse: collapse;
-			background: rgba(34, 40, 49, 0.97);
-			border-radius: 12px;
-			box-shadow: 0 2px 16px rgba(0,198,255,0.07);
+			background: #fff;
+			border-radius: 18px;
+			box-shadow: 0 2px 16px rgba(24,90,157,0.07);
 			margin-top: 10px;
 			overflow: hidden;
 		}
 		th, td {
-			border: 1px solid #00c6ff;
-			padding: 12px 8px;
+			border: 1px solid #b2dffb;
+			padding: 14px 8px;
 			text-align: center;
-			font-size: 15px;
-			color: #f1f1f1;
+			font-size: 16px;
+			color: #1a2a3a;
 			transition: background 0.2s, color 0.2s;
 		}
 		th {
-			background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+			background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
 			color: #fff;
 			font-weight: bold;
 			letter-spacing: 1px;
 		}
 		tr:nth-child(even) td {
-			background: #232526;
+			background: #fafdff;
 		}
 		tr:hover td {
-			background: #00c6ff;
-			color: #232526;
+			background: #e3f0ff;
+			color: #185a9d;
 		}
 		.back-home-btn {
-			display: block;
-			margin: 30px auto 0 auto;
-			background: linear-gradient(90deg,#00c6ff 0%,#007bff 100%);
+			position: fixed;
+			bottom: 24px;
+			left: 50%;
+			transform: translateX(-50%);
+			background: linear-gradient(90deg,#43cea2 0%,#185a9d 100%);
 			color: #fff;
 			border: none;
-			padding: 16px 32px;
-			border-radius: 10px;
+			padding: 18px 0;
+			border-radius: 14px;
 			cursor: pointer;
-			font-size: 20px;
+			font-size: 22px;
 			font-weight: bold;
-			box-shadow: 0 2px 8px rgba(0,198,255,0.13);
+			box-shadow: 0 2px 8px rgba(24,90,157,0.10);
 			transition: background 0.3s, transform 0.2s;
-			width: 90%;
-			max-width: 350px;
+			width: 92vw;
+			max-width: 400px;
+			z-index: 100;
 		}
 		.back-home-btn:active {
-			transform: scale(0.97);
+			transform: translateX(-50%) scale(0.97);
+		}
+		.edit-btn {
+			background: #185a9d;
+			color: #fff;
+			border: none;
+			padding: 8px 18px;
+			border-radius: 8px;
+			cursor: pointer;
+			font-size: 16px;
+			margin-right: 5px;
+			transition: background 0.2s;
+		}
+		.edit-btn:hover {
+			background: #43cea2;
+			color: #1a2a3a;
 		}
 		@media (max-width: 700px) {
 			form, #exportRecordsContainer {
@@ -182,12 +180,13 @@
 			}
 			th, td {
 				font-size: 13px;
-				padding: 7px 4px;
+				padding: 8px 4px;
 			}
 			.back-home-btn {
 				font-size: 16px;
 				padding: 12px 0;
-				border-radius: 8px;
+				border-radius: 10px;
+				bottom: 10px;
 			}
 		}
 	</style>
@@ -224,7 +223,6 @@
 	<div id="exportRecordsContainer">
 		<!-- سيتم عرض البيانات هنا -->
 	</div>
-	<!-- Back to home button placed lower on the page -->
 	<button class="back-home-btn" onclick="pageTransition('home.html')">الصفحة الرئيسية</button>
 	<script>
 		function pageTransition(url) {
@@ -235,6 +233,14 @@
 		}
 		document.body.style.opacity = "1";
 		document.body.style.transition = "opacity 0.35s cubic-bezier(.4,0,.2,1)";
+
+		function formatNumber(num) {
+			if (num === undefined || num === null || num === '') return '';
+			return Number(num).toLocaleString('en-US');
+		}
+
+		document.getElementById('valueRiyal').setAttribute('inputmode', 'decimal');
+		document.getElementById('valueDollar').setAttribute('inputmode', 'decimal');
 
 		document.getElementById('exportForm').addEventListener('submit', function(event) {
 			event.preventDefault();
@@ -262,7 +268,7 @@
 			const container = document.getElementById('exportRecordsContainer');
 			let exportRecords = JSON.parse(localStorage.getItem('exportRecords')) || [];
 			if(exportRecords.length === 0) {
-				container.innerHTML = '<p style="text-align:center;color:#00c6ff;">لا توجد بيانات مسجلة</p>';
+				container.innerHTML = '<p style="text-align:center;color:#2193b0;">لا توجد بيانات مسجلة</p>';
 				return;
 			}
 			let htmlContent = '<table>';
@@ -281,11 +287,11 @@
 				htmlContent += `<td>${record.invoiceNumber || ''}</td>`;
 				htmlContent += `<td>${record.exportDate || ''}</td>`;
 				htmlContent += `<td>${record.exportDescription || ''}</td>`;
-				htmlContent += `<td>${record.valueRiyal || ''}</td>`;
-				htmlContent += `<td>${record.valueDollar || ''}</td>`;
+				htmlContent += `<td>${formatNumber(record.valueRiyal)}</td>`;
+				htmlContent += `<td>${formatNumber(record.valueDollar)}</td>`;
 				htmlContent += `<td>${record.transferred ? 'نعم' : 'لا'}</td>`;
 				htmlContent += `<td>${record.targetBank || ''}</td>`;
-				htmlContent += `<td><button onclick="editExportRecord(${idx})" style="background:#00c6ff;color:#fff;border:none;padding:6px 14px;border-radius:5px;cursor:pointer;font-size:15px;">تعديل</button></td>`;
+				htmlContent += `<td><button class="edit-btn" onclick="editExportRecord(${idx})">تعديل</button></td>`;
 				htmlContent += '</tr>';
 			});
 			htmlContent += '</tbody></table>';

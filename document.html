@@ -12,140 +12,102 @@
     <meta name="theme-color" content="#232526">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             direction: rtl;
             text-align: right;
-            background: linear-gradient(135deg, #232526 0%, #414345 100%) !important;
-            color: #fff;
+            background: linear-gradient(135deg, #fafdff 0%, #e3f0ff 100%) !important;
+            color: #1a2a3a;
             margin: 0;
             padding: 0;
             transition: background-color 0.3s ease-in-out;
         }
         header {
-            background-color: rgba(0, 0, 0, 0.7);
+            background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
             color: #fff;
-            padding: 10px 0;
+            padding: 22px 0 16px 0;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 16px rgba(24,90,157,0.10);
             position: relative;
+            letter-spacing: 1px;
+            border-bottom-left-radius: 28px;
+            border-bottom-right-radius: 28px;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 16px rgba(24,90,157,0.07);
             transition: transform 0.3s ease-in-out;
+            overflow: hidden;
         }
         th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+            border: 1px solid #b2dffb;
+            padding: 14px 8px;
             text-align: center;
-            color: #fff;
+            font-size: 16px;
+            color: #1a2a3a;
         }
         th {
-            background-color: #007bff;
+            background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
             color: #fff;
+            font-weight: bold;
             cursor: pointer;
         }
+        tr:nth-child(even) td {
+            background: #fafdff;
+        }
+        tr:hover td {
+            background: #e3f0ff;
+            color: #185a9d;
+        }
         td[contenteditable="true"] {
-            background-color: rgba(255, 255, 255, 0.7);
+            background-color: #e9f1fa;
             transition: background-color 0.3s;
+            color: #1a2a3a;
         }
         td[contenteditable="true"]:focus {
-            background-color: #e9ecef;
+            background-color: #d2e6fa;
         }
         .actions button {
             margin: 2px;
-            padding: 5px 10px;
-            font-size: 14px;
+            padding: 7px 16px;
+            font-size: 15px;
             border: none;
-            border-radius: 5px;
+            border-radius: 7px;
             cursor: pointer;
-            background-color: #dc3545;
+            background: #dc3545;
             color: #fff;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: background 0.3s, transform 0.3s;
         }
         .actions button:hover {
-            background-color: #c82333;
+            background: #c82333;
             transform: scale(1.05);
         }
         h2 {
             text-align: center;
             margin-top: 20px;
-            color: #333;
+            color: #185a9d;
+            font-size: 24px;
         }
         .back-button {
             position: absolute;
             left: 10px;
             top: 10px;
-            background-color: #007bff;
+            background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
             color: #fff;
             border: none;
-            padding: 10px;
-            border-radius: 5px;
+            padding: 12px 22px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
         }
         .back-button:hover {
-            background-color: #0056b3;
+            background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
             transform: scale(1.05);
-        }
-        /* Password Modal Styles */
-        #passwordModal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(34, 37, 38, 0.97);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        #passwordModal div {
-            background: #232526;
-            padding: 40px 30px;
-            border-radius: 14px;
-            box-shadow: 0 4px 32px #000a;
-            max-width: 90vw;
-        }
-        #passwordModal h2 {
-            color: #00c6ff;
-            text-align: center;
-            margin-bottom: 18px;
-            font-family: 'Cairo', sans-serif;
-        }
-        #passwordModal input {
-            width: 100%;
-            padding: 12px 10px;
-            border-radius: 7px;
-            border: 1px solid #00c6ff;
-            font-size: 18px;
-            margin-bottom: 16px;
-            background: #232526;
-            color: #fff;
-            outline: none;
-        }
-        #passwordModal button {
-            width: 100%;
-            background: linear-gradient(90deg, #00c6ff 0%, #007bff 100%);
-            color: #fff;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 12px 0;
-            border: none;
-            border-radius: 7px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        #passwordModal p {
-            color: #dc3545;
-            text-align: center;
-            margin-top: 12px;
-            display: none;
         }
     </style>
 </head>

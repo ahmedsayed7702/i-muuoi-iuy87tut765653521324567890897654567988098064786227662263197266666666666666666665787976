@@ -6,17 +6,17 @@
 	<title>EL-ZOHOR Home</title>
 	<link rel="manifest" href="manifest.json">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
 	<meta name="apple-mobile-web-app-title" content="EL-ZOHOR">
 	<link rel="apple-touch-icon" href="icon.png">
-	<meta name="theme-color" content="#232526">
+	<meta name="theme-color" content="#f4f8fb">
 	<style>
 		body {
 			font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 			direction: rtl;
 			text-align: center;
-			background: linear-gradient(135deg, #232526 0%, #414345 100%) !important;
-			color: #f1f1f1;
+			background: linear-gradient(135deg, #f4f8fb 0%, #e9f1fa 100%) !important;
+			color: #222;
 			margin: 0;
 			padding: 0;
 			min-height: 100vh;
@@ -43,7 +43,7 @@
 			cursor: pointer;
 			font-weight: bold;
 			letter-spacing: 1px;
-			box-shadow: 0 4px 18px rgba(0,198,255,0.13);
+			box-shadow: 0 4px 18px rgba(33,147,176,0.10);
 			transition: background 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
 			outline: none;
 			display: block;
@@ -52,31 +52,25 @@
 			user-select: none;
 			-webkit-user-select: none;
 			touch-action: manipulation;
-		}
-		#importBtn {
-			background: linear-gradient(90deg, #00c6ff 0%, #007bff 100%);
-			color: #fff;
-		}
-		#exportBtn {
-			background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+			background: linear-gradient(90deg, #6dd5ed 0%, #2193b0 100%);
 			color: #fff;
 		}
 		button:active {
 			transform: scale(0.97);
-			box-shadow: 0 2px 8px rgba(0,198,255,0.18);
+			box-shadow: 0 2px 8px rgba(33,147,176,0.18);
 		}
 		button:hover, button:focus {
-			background: linear-gradient(90deg, #232526 0%, #00c6ff 100%);
-			color: #fff;
+			background: linear-gradient(90deg, #e9f1fa 0%, #2193b0 100%);
+			color: #2193b0;
 			transform: scale(1.04);
-			box-shadow: 0 8px 32px rgba(0,198,255,0.18);
+			box-shadow: 0 8px 32px rgba(33,147,176,0.18);
 		}
 		h1 {
 			margin-top: 40px;
 			font-size: 36px;
 			letter-spacing: 2px;
-			color: #00c6ff;
-			text-shadow: 0 2px 12px rgba(0,198,255,0.13);
+			color: #2193b0;
+			text-shadow: 0 2px 12px rgba(33,147,176,0.13);
 			font-family: 'Cairo', 'Segoe UI', sans-serif;
 			animation: fadeInDown 1.2s;
 		}
@@ -110,8 +104,10 @@
 <body>
 	<h1>EL-ZOHOR</h1>
 	<div class="container">
-		<button id="importBtn" onclick="pageTransition('index.html')">استيراد</button>
+		<button id="importBtn" onclick="pageTransition('import.html')">استيراد</button>
 		<button id="exportBtn" onclick="pageTransition('export.html')">تصدير</button>
+		<button id="walletBtn" onclick="pageTransition('wallet.html')">حسابات المحفظة</button>
+		<button id="bankBtn" onclick="pageTransition('bank.html')">حسابات البنك</button>
 	</div>
 </body>
 </html>
